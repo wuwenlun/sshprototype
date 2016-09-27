@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xutown.hurtplatform.dao.CureSituationMapper" >
+  <resultMap id="BaseResultMap" type="com.xutown.hurtplatform.model.CureSituation" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="patient_id" property="patientId" jdbcType="CHAR" />
+    <result column="acc_id" property="accId" jdbcType="CHAR" />
+    <result column="choice_item_id" property="choiceItemId" jdbcType="CHAR" />
+    <result column="item_remark" property="itemRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, patient_id, acc_id, choice_item_id, item_remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cure_situation
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cure_situation
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xutown.hurtplatform.model.CureSituation" >
+    insert into cure_situation (id, patient_id, acc_id, 
+      choice_item_id, item_remark)
+    values (#{id,jdbcType=CHAR}, #{patientId,jdbcType=CHAR}, #{accId,jdbcType=CHAR}, 
+      #{choiceItemId,jdbcType=CHAR}, #{itemRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xutown.hurtplatform.model.CureSituation" >
+    insert into cure_situation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="accId != null" >
+        acc_id,
+      </if>
+      <if test="choiceItemId != null" >
+        choice_item_id,
+      </if>
+      <if test="itemRemark != null" >
+        item_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=CHAR},
+      </if>
+      <if test="accId != null" >
+        #{accId,jdbcType=CHAR},
+      </if>
+      <if test="choiceItemId != null" >
+        #{choiceItemId,jdbcType=CHAR},
+      </if>
+      <if test="itemRemark != null" >
+        #{itemRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xutown.hurtplatform.model.CureSituation" >
+    update cure_situation
+    <set >
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=CHAR},
+      </if>
+      <if test="accId != null" >
+        acc_id = #{accId,jdbcType=CHAR},
+      </if>
+      <if test="choiceItemId != null" >
+        choice_item_id = #{choiceItemId,jdbcType=CHAR},
+      </if>
+      <if test="itemRemark != null" >
+        item_remark = #{itemRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xutown.hurtplatform.model.CureSituation" >
+    update cure_situation
+    set patient_id = #{patientId,jdbcType=CHAR},
+      acc_id = #{accId,jdbcType=CHAR},
+      choice_item_id = #{choiceItemId,jdbcType=CHAR},
+      item_remark = #{itemRemark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

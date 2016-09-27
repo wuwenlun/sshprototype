@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xutown.hurtplatform.dao.AuthorizationMapper" >
+  <resultMap id="BaseResultMap" type="com.xutown.hurtplatform.model.Authorization" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="acc_id" property="accId" jdbcType="CHAR" />
+    <result column="patient_id" property="patientId" jdbcType="CHAR" />
+    <result column="item_id" property="itemId" jdbcType="CHAR" />
+    <result column="item_value" property="itemValue" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, acc_id, patient_id, item_id, item_value
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from authorization
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from authorization
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xutown.hurtplatform.model.Authorization" >
+    insert into authorization (id, acc_id, patient_id, 
+      item_id, item_value)
+    values (#{id,jdbcType=CHAR}, #{accId,jdbcType=CHAR}, #{patientId,jdbcType=CHAR}, 
+      #{itemId,jdbcType=CHAR}, #{itemValue,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xutown.hurtplatform.model.Authorization" >
+    insert into authorization
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="accId != null" >
+        acc_id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="itemValue != null" >
+        item_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="accId != null" >
+        #{accId,jdbcType=CHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=CHAR},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=CHAR},
+      </if>
+      <if test="itemValue != null" >
+        #{itemValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xutown.hurtplatform.model.Authorization" >
+    update authorization
+    <set >
+      <if test="accId != null" >
+        acc_id = #{accId,jdbcType=CHAR},
+      </if>
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=CHAR},
+      </if>
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=CHAR},
+      </if>
+      <if test="itemValue != null" >
+        item_value = #{itemValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xutown.hurtplatform.model.Authorization" >
+    update authorization
+    set acc_id = #{accId,jdbcType=CHAR},
+      patient_id = #{patientId,jdbcType=CHAR},
+      item_id = #{itemId,jdbcType=CHAR},
+      item_value = #{itemValue,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

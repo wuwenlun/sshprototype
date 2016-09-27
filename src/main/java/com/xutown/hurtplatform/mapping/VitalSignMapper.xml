@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xutown.hurtplatform.dao.VitalSignMapper" >
+  <resultMap id="BaseResultMap" type="com.xutown.hurtplatform.model.VitalSign" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="acc_id" property="accId" jdbcType="CHAR" />
+    <result column="patient_id" property="patientId" jdbcType="CHAR" />
+    <result column="bp_sbp" property="bpSbp" jdbcType="VARCHAR" />
+    <result column="bp_dbp" property="bpDbp" jdbcType="VARCHAR" />
+    <result column="p_heart_rate" property="pHeartRate" jdbcType="VARCHAR" />
+    <result column="spo2" property="spo2" jdbcType="VARCHAR" />
+    <result column="breathing_rate" property="breathingRate" jdbcType="VARCHAR" />
+    <result column="body_temperature" property="bodyTemperature" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, acc_id, patient_id, bp_sbp, bp_dbp, p_heart_rate, spo2, breathing_rate, body_temperature
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from vital_sign
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from vital_sign
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xutown.hurtplatform.model.VitalSign" >
+    insert into vital_sign (id, acc_id, patient_id, 
+      bp_sbp, bp_dbp, p_heart_rate, 
+      spo2, breathing_rate, body_temperature
+      )
+    values (#{id,jdbcType=CHAR}, #{accId,jdbcType=CHAR}, #{patientId,jdbcType=CHAR}, 
+      #{bpSbp,jdbcType=VARCHAR}, #{bpDbp,jdbcType=VARCHAR}, #{pHeartRate,jdbcType=VARCHAR}, 
+      #{spo2,jdbcType=VARCHAR}, #{breathingRate,jdbcType=VARCHAR}, #{bodyTemperature,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xutown.hurtplatform.model.VitalSign" >
+    insert into vital_sign
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="accId != null" >
+        acc_id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="bpSbp != null" >
+        bp_sbp,
+      </if>
+      <if test="bpDbp != null" >
+        bp_dbp,
+      </if>
+      <if test="pHeartRate != null" >
+        p_heart_rate,
+      </if>
+      <if test="spo2 != null" >
+        spo2,
+      </if>
+      <if test="breathingRate != null" >
+        breathing_rate,
+      </if>
+      <if test="bodyTemperature != null" >
+        body_temperature,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="accId != null" >
+        #{accId,jdbcType=CHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=CHAR},
+      </if>
+      <if test="bpSbp != null" >
+        #{bpSbp,jdbcType=VARCHAR},
+      </if>
+      <if test="bpDbp != null" >
+        #{bpDbp,jdbcType=VARCHAR},
+      </if>
+      <if test="pHeartRate != null" >
+        #{pHeartRate,jdbcType=VARCHAR},
+      </if>
+      <if test="spo2 != null" >
+        #{spo2,jdbcType=VARCHAR},
+      </if>
+      <if test="breathingRate != null" >
+        #{breathingRate,jdbcType=VARCHAR},
+      </if>
+      <if test="bodyTemperature != null" >
+        #{bodyTemperature,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xutown.hurtplatform.model.VitalSign" >
+    update vital_sign
+    <set >
+      <if test="accId != null" >
+        acc_id = #{accId,jdbcType=CHAR},
+      </if>
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=CHAR},
+      </if>
+      <if test="bpSbp != null" >
+        bp_sbp = #{bpSbp,jdbcType=VARCHAR},
+      </if>
+      <if test="bpDbp != null" >
+        bp_dbp = #{bpDbp,jdbcType=VARCHAR},
+      </if>
+      <if test="pHeartRate != null" >
+        p_heart_rate = #{pHeartRate,jdbcType=VARCHAR},
+      </if>
+      <if test="spo2 != null" >
+        spo2 = #{spo2,jdbcType=VARCHAR},
+      </if>
+      <if test="breathingRate != null" >
+        breathing_rate = #{breathingRate,jdbcType=VARCHAR},
+      </if>
+      <if test="bodyTemperature != null" >
+        body_temperature = #{bodyTemperature,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xutown.hurtplatform.model.VitalSign" >
+    update vital_sign
+    set acc_id = #{accId,jdbcType=CHAR},
+      patient_id = #{patientId,jdbcType=CHAR},
+      bp_sbp = #{bpSbp,jdbcType=VARCHAR},
+      bp_dbp = #{bpDbp,jdbcType=VARCHAR},
+      p_heart_rate = #{pHeartRate,jdbcType=VARCHAR},
+      spo2 = #{spo2,jdbcType=VARCHAR},
+      breathing_rate = #{breathingRate,jdbcType=VARCHAR},
+      body_temperature = #{bodyTemperature,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

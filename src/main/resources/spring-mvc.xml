@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-4.2.xsd 
+http://www.springframework.org/schema/mvc 
+http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+	<!-- 自动扫描 -->
+	<context:component-scan base-package="com.xutown.hurtplatform.controller" />
+	
+   <bean class="com.xutown.hurtplatform.controller.SwaggerConfig"/>
+	<!-- swagger -->
+	<bean id="springSwaggerConfig" class="com.mangofactory.swagger.configuration.SpringSwaggerConfig"/>
+	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+	<bean id="fastJsonHttpMessageConverter"
+		class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="converters">
+			<list>
+				<bean class="com.xutown.hurtplatform.web.CustomDateEdtor" />
+			</list>
+		</property>
+	</bean>
+	<!-- 适配器 注册日期转换器等 -->
+	<mvc:annotation-driven conversion-service="conversionService">
+		<mvc:message-converters register-defaults="true">
+			<ref bean="fastJsonHttpMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<mvc:resources mapping="/swagger/**" location="/swagger/" />
+	<!-- 缓存静态资源 -->
+	<!-- js，css，img资源缓存一年 -->
+	<!-- <mvc:resources mapping="/build/**" location="/build/" cache-period="31536000" 
+		/> <mvc:resources mapping="/database/**" location="/database/" cache-period="31536000" 
+		/> <mvc:resources mapping="/uploadPicture/**" location="/uploadPicture/" 
+		cache-period="0" /> <mvc:resources mapping="/css/**" location="/css/" cache-period="31536000" 
+		/> <mvc:resources mapping="/js/**" location="/js/" cache-period="31536000" 
+		/> <mvc:resources mapping="/img/**" location="/img/" cache-period="31536000" 
+		/> <mvc:resources mapping="/web/**" location="/web/" cache-period="31536000" 
+		/> -->
+
+	<!-- 对模型视图名称的解析，在模型视图名称添加前后缀 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/template/" p:suffix=".jsp" />
+
+	<!-- 映射器 -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+	</bean>
+	<!-- 适配器 -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
+
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+		<property name="maxUploadSize">
+			<value>104857600</value><!-- 上传文件大小限制为31M，31*1024*1024 -->
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
+</beans>

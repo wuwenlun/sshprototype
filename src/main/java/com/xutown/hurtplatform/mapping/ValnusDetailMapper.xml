@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xutown.hurtplatform.dao.ValnusDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.xutown.hurtplatform.model.ValnusDetail" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="val_id" property="valId" jdbcType="CHAR" />
+    <result column="location" property="location" jdbcType="VARCHAR" />
+    <result column="bloodloss" property="bloodloss" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="acc_id" property="accId" jdbcType="CHAR" />
+    <result column="patient_id" property="patientId" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, val_id, location, bloodloss, remark, acc_id, patient_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from valnus_detail
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from valnus_detail
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xutown.hurtplatform.model.ValnusDetail" >
+    insert into valnus_detail (id, val_id, location, 
+      bloodloss, remark, acc_id, 
+      patient_id)
+    values (#{id,jdbcType=CHAR}, #{valId,jdbcType=CHAR}, #{location,jdbcType=VARCHAR}, 
+      #{bloodloss,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{accId,jdbcType=CHAR}, 
+      #{patientId,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xutown.hurtplatform.model.ValnusDetail" >
+    insert into valnus_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="valId != null" >
+        val_id,
+      </if>
+      <if test="location != null" >
+        location,
+      </if>
+      <if test="bloodloss != null" >
+        bloodloss,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="accId != null" >
+        acc_id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="valId != null" >
+        #{valId,jdbcType=CHAR},
+      </if>
+      <if test="location != null" >
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodloss != null" >
+        #{bloodloss,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="accId != null" >
+        #{accId,jdbcType=CHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xutown.hurtplatform.model.ValnusDetail" >
+    update valnus_detail
+    <set >
+      <if test="valId != null" >
+        val_id = #{valId,jdbcType=CHAR},
+      </if>
+      <if test="location != null" >
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodloss != null" >
+        bloodloss = #{bloodloss,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="accId != null" >
+        acc_id = #{accId,jdbcType=CHAR},
+      </if>
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xutown.hurtplatform.model.ValnusDetail" >
+    update valnus_detail
+    set val_id = #{valId,jdbcType=CHAR},
+      location = #{location,jdbcType=VARCHAR},
+      bloodloss = #{bloodloss,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      acc_id = #{accId,jdbcType=CHAR},
+      patient_id = #{patientId,jdbcType=CHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

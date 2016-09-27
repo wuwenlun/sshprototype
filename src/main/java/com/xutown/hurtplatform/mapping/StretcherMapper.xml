@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xutown.hurtplatform.dao.StretcherMapper" >
+  <resultMap id="BaseResultMap" type="com.xutown.hurtplatform.model.Stretcher" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="stretcher_no" property="stretcherNo" jdbcType="TINYINT" />
+    <result column="stretcher_code" property="stretcherCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, stretcher_no, stretcher_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from stretcher
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from stretcher
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xutown.hurtplatform.model.Stretcher" >
+    insert into stretcher (id, stretcher_no, stretcher_code
+      )
+    values (#{id,jdbcType=VARCHAR}, #{stretcherNo,jdbcType=TINYINT}, #{stretcherCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xutown.hurtplatform.model.Stretcher" >
+    insert into stretcher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stretcherNo != null" >
+        stretcher_no,
+      </if>
+      <if test="stretcherCode != null" >
+        stretcher_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="stretcherNo != null" >
+        #{stretcherNo,jdbcType=TINYINT},
+      </if>
+      <if test="stretcherCode != null" >
+        #{stretcherCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xutown.hurtplatform.model.Stretcher" >
+    update stretcher
+    <set >
+      <if test="stretcherNo != null" >
+        stretcher_no = #{stretcherNo,jdbcType=TINYINT},
+      </if>
+      <if test="stretcherCode != null" >
+        stretcher_code = #{stretcherCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xutown.hurtplatform.model.Stretcher" >
+    update stretcher
+    set stretcher_no = #{stretcherNo,jdbcType=TINYINT},
+      stretcher_code = #{stretcherCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

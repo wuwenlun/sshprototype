@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xutown.hurtplatform.dao.ChoiceAttrMapper" >
+  <resultMap id="BaseResultMap" type="com.xutown.hurtplatform.model.ChoiceAttr" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="module_id" property="moduleId" jdbcType="CHAR" />
+    <result column="attr_name" property="attrName" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="check_type" property="checkType" jdbcType="VARCHAR" />
+    <result column="enable" property="enable" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, module_id, attr_name, remark, check_type, enable
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from choice_attr
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from choice_attr
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xutown.hurtplatform.model.ChoiceAttr" >
+    insert into choice_attr (id, module_id, attr_name, 
+      remark, check_type, enable
+      )
+    values (#{id,jdbcType=CHAR}, #{moduleId,jdbcType=CHAR}, #{attrName,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{checkType,jdbcType=VARCHAR}, #{enable,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xutown.hurtplatform.model.ChoiceAttr" >
+    insert into choice_attr
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="moduleId != null" >
+        module_id,
+      </if>
+      <if test="attrName != null" >
+        attr_name,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="checkType != null" >
+        check_type,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="moduleId != null" >
+        #{moduleId,jdbcType=CHAR},
+      </if>
+      <if test="attrName != null" >
+        #{attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="checkType != null" >
+        #{checkType,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xutown.hurtplatform.model.ChoiceAttr" >
+    update choice_attr
+    <set >
+      <if test="moduleId != null" >
+        module_id = #{moduleId,jdbcType=CHAR},
+      </if>
+      <if test="attrName != null" >
+        attr_name = #{attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="checkType != null" >
+        check_type = #{checkType,jdbcType=VARCHAR},
+      </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xutown.hurtplatform.model.ChoiceAttr" >
+    update choice_attr
+    set module_id = #{moduleId,jdbcType=CHAR},
+      attr_name = #{attrName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      check_type = #{checkType,jdbcType=VARCHAR},
+      enable = #{enable,jdbcType=BIT}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

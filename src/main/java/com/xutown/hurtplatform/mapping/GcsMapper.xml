@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xutown.hurtplatform.dao.GcsMapper" >
+  <resultMap id="BaseResultMap" type="com.xutown.hurtplatform.model.Gcs" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="acc_id" property="accId" jdbcType="CHAR" />
+    <result column="patient_id" property="patientId" jdbcType="CHAR" />
+    <result column="eye_open_status" property="eyeOpenStatus" jdbcType="CHAR" />
+    <result column="verbal_status" property="verbalStatus" jdbcType="CHAR" />
+    <result column="action_status" property="actionStatus" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, acc_id, patient_id, eye_open_status, verbal_status, action_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from gcs
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from gcs
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xutown.hurtplatform.model.Gcs" >
+    insert into gcs (id, acc_id, patient_id, 
+      eye_open_status, verbal_status, action_status
+      )
+    values (#{id,jdbcType=CHAR}, #{accId,jdbcType=CHAR}, #{patientId,jdbcType=CHAR}, 
+      #{eyeOpenStatus,jdbcType=CHAR}, #{verbalStatus,jdbcType=CHAR}, #{actionStatus,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xutown.hurtplatform.model.Gcs" >
+    insert into gcs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="accId != null" >
+        acc_id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="eyeOpenStatus != null" >
+        eye_open_status,
+      </if>
+      <if test="verbalStatus != null" >
+        verbal_status,
+      </if>
+      <if test="actionStatus != null" >
+        action_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="accId != null" >
+        #{accId,jdbcType=CHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=CHAR},
+      </if>
+      <if test="eyeOpenStatus != null" >
+        #{eyeOpenStatus,jdbcType=CHAR},
+      </if>
+      <if test="verbalStatus != null" >
+        #{verbalStatus,jdbcType=CHAR},
+      </if>
+      <if test="actionStatus != null" >
+        #{actionStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xutown.hurtplatform.model.Gcs" >
+    update gcs
+    <set >
+      <if test="accId != null" >
+        acc_id = #{accId,jdbcType=CHAR},
+      </if>
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=CHAR},
+      </if>
+      <if test="eyeOpenStatus != null" >
+        eye_open_status = #{eyeOpenStatus,jdbcType=CHAR},
+      </if>
+      <if test="verbalStatus != null" >
+        verbal_status = #{verbalStatus,jdbcType=CHAR},
+      </if>
+      <if test="actionStatus != null" >
+        action_status = #{actionStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xutown.hurtplatform.model.Gcs" >
+    update gcs
+    set acc_id = #{accId,jdbcType=CHAR},
+      patient_id = #{patientId,jdbcType=CHAR},
+      eye_open_status = #{eyeOpenStatus,jdbcType=CHAR},
+      verbal_status = #{verbalStatus,jdbcType=CHAR},
+      action_status = #{actionStatus,jdbcType=CHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

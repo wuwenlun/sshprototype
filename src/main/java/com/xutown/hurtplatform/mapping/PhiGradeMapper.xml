@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xutown.hurtplatform.dao.PhiGradeMapper" >
+  <resultMap id="BaseResultMap" type="com.xutown.hurtplatform.model.PhiGrade" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="mental_status" property="mentalStatus" jdbcType="CHAR" />
+    <result column="attach_valnus_status" property="attachValnusStatus" jdbcType="CHAR" />
+    <result column="bsp_scope" property="bspScope" jdbcType="CHAR" />
+    <result column="heart_rate_scope" property="heartRateScope" jdbcType="CHAR" />
+    <result column="breathe_rate_scope" property="breatheRateScope" jdbcType="CHAR" />
+    <result column="patient_id" property="patientId" jdbcType="CHAR" />
+    <result column="acc_id" property="accId" jdbcType="CHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, mental_status, attach_valnus_status, bsp_scope, heart_rate_scope, breathe_rate_scope, 
+    patient_id, acc_id, add_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from phi_grade
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from phi_grade
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xutown.hurtplatform.model.PhiGrade" >
+    insert into phi_grade (id, mental_status, attach_valnus_status, 
+      bsp_scope, heart_rate_scope, breathe_rate_scope, 
+      patient_id, acc_id, add_time
+      )
+    values (#{id,jdbcType=CHAR}, #{mentalStatus,jdbcType=CHAR}, #{attachValnusStatus,jdbcType=CHAR}, 
+      #{bspScope,jdbcType=CHAR}, #{heartRateScope,jdbcType=CHAR}, #{breatheRateScope,jdbcType=CHAR}, 
+      #{patientId,jdbcType=CHAR}, #{accId,jdbcType=CHAR}, #{addTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xutown.hurtplatform.model.PhiGrade" >
+    insert into phi_grade
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mentalStatus != null" >
+        mental_status,
+      </if>
+      <if test="attachValnusStatus != null" >
+        attach_valnus_status,
+      </if>
+      <if test="bspScope != null" >
+        bsp_scope,
+      </if>
+      <if test="heartRateScope != null" >
+        heart_rate_scope,
+      </if>
+      <if test="breatheRateScope != null" >
+        breathe_rate_scope,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="accId != null" >
+        acc_id,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="mentalStatus != null" >
+        #{mentalStatus,jdbcType=CHAR},
+      </if>
+      <if test="attachValnusStatus != null" >
+        #{attachValnusStatus,jdbcType=CHAR},
+      </if>
+      <if test="bspScope != null" >
+        #{bspScope,jdbcType=CHAR},
+      </if>
+      <if test="heartRateScope != null" >
+        #{heartRateScope,jdbcType=CHAR},
+      </if>
+      <if test="breatheRateScope != null" >
+        #{breatheRateScope,jdbcType=CHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=CHAR},
+      </if>
+      <if test="accId != null" >
+        #{accId,jdbcType=CHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xutown.hurtplatform.model.PhiGrade" >
+    update phi_grade
+    <set >
+      <if test="mentalStatus != null" >
+        mental_status = #{mentalStatus,jdbcType=CHAR},
+      </if>
+      <if test="attachValnusStatus != null" >
+        attach_valnus_status = #{attachValnusStatus,jdbcType=CHAR},
+      </if>
+      <if test="bspScope != null" >
+        bsp_scope = #{bspScope,jdbcType=CHAR},
+      </if>
+      <if test="heartRateScope != null" >
+        heart_rate_scope = #{heartRateScope,jdbcType=CHAR},
+      </if>
+      <if test="breatheRateScope != null" >
+        breathe_rate_scope = #{breatheRateScope,jdbcType=CHAR},
+      </if>
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=CHAR},
+      </if>
+      <if test="accId != null" >
+        acc_id = #{accId,jdbcType=CHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xutown.hurtplatform.model.PhiGrade" >
+    update phi_grade
+    set mental_status = #{mentalStatus,jdbcType=CHAR},
+      attach_valnus_status = #{attachValnusStatus,jdbcType=CHAR},
+      bsp_scope = #{bspScope,jdbcType=CHAR},
+      heart_rate_scope = #{heartRateScope,jdbcType=CHAR},
+      breathe_rate_scope = #{breatheRateScope,jdbcType=CHAR},
+      patient_id = #{patientId,jdbcType=CHAR},
+      acc_id = #{accId,jdbcType=CHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

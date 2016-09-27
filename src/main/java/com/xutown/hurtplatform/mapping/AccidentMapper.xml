@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xutown.hurtplatform.dao.AccidentMapper" >
+  <resultMap id="BaseResultMap" type="com.xutown.hurtplatform.model.Accident" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="patient_id" property="patientId" jdbcType="CHAR" />
+    <result column="deliver_hospital" property="deliverHospital" jdbcType="VARCHAR" />
+    <result column="receive_alarm_time" property="receiveAlarmTime" jdbcType="TIMESTAMP" />
+    <result column="rescue_arrive_time" property="rescueArriveTime" jdbcType="TIMESTAMP" />
+    <result column="temperature" property="temperature" jdbcType="VARCHAR" />
+    <result column="humidity" property="humidity" jdbcType="VARCHAR" />
+    <result column="weather_status" property="weatherStatus" jdbcType="VARCHAR" />
+    <result column="accident_spot" property="accidentSpot" jdbcType="VARCHAR" />
+    <result column="transport" property="transport" jdbcType="CHAR" />
+    <result column="vulnus_accident_type" property="vulnusAccidentType" jdbcType="CHAR" />
+    <result column="stretcher_id" property="stretcherId" jdbcType="CHAR" />
+    <result column="handle_user" property="handleUser" jdbcType="CHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="cure_situation" property="cureSituation" jdbcType="VARCHAR" />
+    <result column="accident_remark" property="accidentRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, patient_id, deliver_hospital, receive_alarm_time, rescue_arrive_time, temperature, 
+    humidity, weather_status, accident_spot, transport, vulnus_accident_type, stretcher_id, 
+    handle_user, add_time, cure_situation, accident_remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from accident
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from accident
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xutown.hurtplatform.model.Accident" >
+    insert into accident (id, patient_id, deliver_hospital, 
+      receive_alarm_time, rescue_arrive_time, 
+      temperature, humidity, weather_status, 
+      accident_spot, transport, vulnus_accident_type, 
+      stretcher_id, handle_user, add_time, 
+      cure_situation, accident_remark)
+    values (#{id,jdbcType=CHAR}, #{patientId,jdbcType=CHAR}, #{deliverHospital,jdbcType=VARCHAR}, 
+      #{receiveAlarmTime,jdbcType=TIMESTAMP}, #{rescueArriveTime,jdbcType=TIMESTAMP}, 
+      #{temperature,jdbcType=VARCHAR}, #{humidity,jdbcType=VARCHAR}, #{weatherStatus,jdbcType=VARCHAR}, 
+      #{accidentSpot,jdbcType=VARCHAR}, #{transport,jdbcType=CHAR}, #{vulnusAccidentType,jdbcType=CHAR}, 
+      #{stretcherId,jdbcType=CHAR}, #{handleUser,jdbcType=CHAR}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{cureSituation,jdbcType=VARCHAR}, #{accidentRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xutown.hurtplatform.model.Accident" >
+    insert into accident
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="deliverHospital != null" >
+        deliver_hospital,
+      </if>
+      <if test="receiveAlarmTime != null" >
+        receive_alarm_time,
+      </if>
+      <if test="rescueArriveTime != null" >
+        rescue_arrive_time,
+      </if>
+      <if test="temperature != null" >
+        temperature,
+      </if>
+      <if test="humidity != null" >
+        humidity,
+      </if>
+      <if test="weatherStatus != null" >
+        weather_status,
+      </if>
+      <if test="accidentSpot != null" >
+        accident_spot,
+      </if>
+      <if test="transport != null" >
+        transport,
+      </if>
+      <if test="vulnusAccidentType != null" >
+        vulnus_accident_type,
+      </if>
+      <if test="stretcherId != null" >
+        stretcher_id,
+      </if>
+      <if test="handleUser != null" >
+        handle_user,
+      </if>
+      <if test="addTime != null" >
+        add_time,
+      </if>
+      <if test="cureSituation != null" >
+        cure_situation,
+      </if>
+      <if test="accidentRemark != null" >
+        accident_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=CHAR},
+      </if>
+      <if test="deliverHospital != null" >
+        #{deliverHospital,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveAlarmTime != null" >
+        #{receiveAlarmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rescueArriveTime != null" >
+        #{rescueArriveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="temperature != null" >
+        #{temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="humidity != null" >
+        #{humidity,jdbcType=VARCHAR},
+      </if>
+      <if test="weatherStatus != null" >
+        #{weatherStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentSpot != null" >
+        #{accidentSpot,jdbcType=VARCHAR},
+      </if>
+      <if test="transport != null" >
+        #{transport,jdbcType=CHAR},
+      </if>
+      <if test="vulnusAccidentType != null" >
+        #{vulnusAccidentType,jdbcType=CHAR},
+      </if>
+      <if test="stretcherId != null" >
+        #{stretcherId,jdbcType=CHAR},
+      </if>
+      <if test="handleUser != null" >
+        #{handleUser,jdbcType=CHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cureSituation != null" >
+        #{cureSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentRemark != null" >
+        #{accidentRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xutown.hurtplatform.model.Accident" >
+    update accident
+    <set >
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=CHAR},
+      </if>
+      <if test="deliverHospital != null" >
+        deliver_hospital = #{deliverHospital,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveAlarmTime != null" >
+        receive_alarm_time = #{receiveAlarmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rescueArriveTime != null" >
+        rescue_arrive_time = #{rescueArriveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="temperature != null" >
+        temperature = #{temperature,jdbcType=VARCHAR},
+      </if>
+      <if test="humidity != null" >
+        humidity = #{humidity,jdbcType=VARCHAR},
+      </if>
+      <if test="weatherStatus != null" >
+        weather_status = #{weatherStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentSpot != null" >
+        accident_spot = #{accidentSpot,jdbcType=VARCHAR},
+      </if>
+      <if test="transport != null" >
+        transport = #{transport,jdbcType=CHAR},
+      </if>
+      <if test="vulnusAccidentType != null" >
+        vulnus_accident_type = #{vulnusAccidentType,jdbcType=CHAR},
+      </if>
+      <if test="stretcherId != null" >
+        stretcher_id = #{stretcherId,jdbcType=CHAR},
+      </if>
+      <if test="handleUser != null" >
+        handle_user = #{handleUser,jdbcType=CHAR},
+      </if>
+      <if test="addTime != null" >
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cureSituation != null" >
+        cure_situation = #{cureSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentRemark != null" >
+        accident_remark = #{accidentRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xutown.hurtplatform.model.Accident" >
+    update accident
+    set patient_id = #{patientId,jdbcType=CHAR},
+      deliver_hospital = #{deliverHospital,jdbcType=VARCHAR},
+      receive_alarm_time = #{receiveAlarmTime,jdbcType=TIMESTAMP},
+      rescue_arrive_time = #{rescueArriveTime,jdbcType=TIMESTAMP},
+      temperature = #{temperature,jdbcType=VARCHAR},
+      humidity = #{humidity,jdbcType=VARCHAR},
+      weather_status = #{weatherStatus,jdbcType=VARCHAR},
+      accident_spot = #{accidentSpot,jdbcType=VARCHAR},
+      transport = #{transport,jdbcType=CHAR},
+      vulnus_accident_type = #{vulnusAccidentType,jdbcType=CHAR},
+      stretcher_id = #{stretcherId,jdbcType=CHAR},
+      handle_user = #{handleUser,jdbcType=CHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      cure_situation = #{cureSituation,jdbcType=VARCHAR},
+      accident_remark = #{accidentRemark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>
